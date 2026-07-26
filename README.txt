@@ -22,3 +22,9 @@ GitHub:
    https://sribakovas-wq.github.io/our-story/
 
 Muzika prasideda nuo 24 sekundės.
+
+
+ATNAUJINTA PABAIGA
+
+Pabaigos tekstas dabar rodomas kaip ilgesnis romantiškas laiškas.
+Scenų trukmė automatiškai prisitaiko prie teksto ilgio, kad tekstą būtų galima ramiai perskaityti.
