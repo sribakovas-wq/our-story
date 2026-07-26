@@ -194,18 +194,21 @@
 
     .photo-card{
       width:min(92vw,760px);
-      height:min(78svh,900px);
+      height:min(86svh,920px);
       position:relative;
+      display:flex;
+      flex-direction:column;
       border-radius:26px;
       overflow:hidden;
-      background:#111;
-      border:1px solid rgba(255,255,255,.1);
+      background:rgba(18,14,20,.96);
+      border:1px solid rgba(255,255,255,.12);
       box-shadow:0 28px 90px rgba(0,0,0,.62);
     }
 
     .photo-card img{
       width:100%;
-      height:100%;
+      flex:1 1 auto;
+      min-height:0;
       display:block;
       object-fit:cover;
       transform:scale(1.015);
@@ -218,33 +221,31 @@
     }
 
     .photo-card::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.16) 54%,rgba(0,0,0,.05));
+      display:none;
     }
 
     .caption{
-      position:absolute;
+      position:relative;
       z-index:2;
-      left:0;
-      right:0;
-      bottom:0;
-      padding:34px 24px 28px;
+      flex:0 0 auto;
+      padding:22px 28px 24px;
       text-align:center;
-      font-size:clamp(22px,5.4vw,38px);
-      line-height:1.28;
-      text-shadow:0 2px 14px rgba(0,0,0,.78);
-      text-wrap:balance;
+      font-size:clamp(16px,2.1vw,20px);
+      line-height:1.55;
+      color:#fffaf6;
+      background:
+        linear-gradient(135deg,rgba(44,27,39,.98),rgba(23,18,27,.98));
+      border-top:1px solid rgba(255,255,255,.1);
+      text-shadow:none;
+      text-wrap:pretty;
     }
 
     .caption span{
       display:block;
-      margin-top:11px;
-      color:rgba(255,255,255,.68);
-      font-size:.43em;
-      letter-spacing:.1em;
+      margin-top:12px;
+      color:rgba(255,255,255,.66);
+      font-size:.68em;
+      letter-spacing:.12em;
       text-transform:uppercase;
     }
 
@@ -353,13 +354,18 @@
 
       .photo-card{
         width:94vw;
-        height:min(76svh,820px);
+        height:min(88svh,840px);
         border-radius:20px;
       }
 
+      .photo-card img{
+        min-height:38svh;
+      }
+
       .caption{
-        padding:28px 18px 24px;
-        font-size:clamp(22px,6vw,34px);
+        padding:18px 18px 20px;
+        font-size:clamp(15px,4vw,18px);
+        line-height:1.48;
       }
 
       .controls{right:10px}
