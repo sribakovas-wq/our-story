@@ -1,71 +1,576 @@
 <!doctype html>
 <html lang="lt">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050507">
-<title>Mūsų istorija</title>
-<style>
-:root{--bg:#050507;--text:#fffaf6;--muted:rgba(255,250,246,.72);--accent:#ff5f84;--gold:#e5c58e}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text)}
-body{font-family:Georgia,"Times New Roman",serif;overflow:hidden}button{font:inherit}
-.stars,.stars:before,.stars:after{position:fixed;inset:0;content:"";pointer-events:none;background-image:radial-gradient(circle at 15% 20%,rgba(255,255,255,.9) 0 1px,transparent 1.5px),radial-gradient(circle at 80% 25%,rgba(255,255,255,.7) 0 1px,transparent 1.5px),radial-gradient(circle at 35% 75%,rgba(255,255,255,.8) 0 1px,transparent 1.5px),radial-gradient(circle at 65% 65%,rgba(255,255,255,.55) 0 1px,transparent 1.5px);background-size:210px 210px,270px 270px,330px 330px,390px 390px;opacity:.35;animation:drift 28s linear infinite}
-.stars:before{opacity:.18;transform:scale(1.3);animation-duration:42s}.stars:after{opacity:.12;transform:scale(1.7);animation-duration:58s}@keyframes drift{to{transform:translate3d(-120px,-180px,0)}}
-.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:max(24px,env(safe-area-inset-top)) 18px max(28px,env(safe-area-inset-bottom))}
-#start{z-index:20;background:radial-gradient(circle at 50% 45%,#17131a 0,#050507 58%)}.start-card{text-align:center;max-width:620px}.tiny{letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-size:12px}
-.start-card h1{font-size:clamp(38px,10vw,78px);font-weight:400;margin:18px 0 14px}.start-card p{color:var(--muted);font-size:clamp(17px,4vw,22px);line-height:1.55;margin:0 0 30px}
-.start-btn{border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:16px 34px;color:#fff;background:rgba(255,255,255,.07);backdrop-filter:blur(8px);cursor:pointer;font-size:19px;box-shadow:0 12px 40px rgba(0,0,0,.35)}.start-btn:active{transform:scale(.97)}
-#experience{display:none;z-index:5}.scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:scale(1.015);transition:opacity 1.2s ease,transform 1.2s ease,visibility 1.2s;padding:max(26px,env(safe-area-inset-top)) 18px max(30px,env(safe-area-inset-bottom))}
-.scene.active{opacity:1;visibility:visible;transform:scale(1)}.text-scene{text-align:center;max-width:900px;font-size:clamp(30px,7vw,66px);line-height:1.24;text-wrap:balance}.text-scene small{display:block;margin-top:20px;color:var(--muted);font-size:.36em;letter-spacing:.04em}
-.photo-card{width:min(92vw,760px);height:min(78svh,900px);position:relative;border-radius:26px;overflow:hidden;box-shadow:0 28px 90px rgba(0,0,0,.6);background:#111;border:1px solid rgba(255,255,255,.1)}
-.photo-card img{width:100%;height:100%;object-fit:cover;display:block}.photo-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92),rgba(0,0,0,0) 58%)}
-.caption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:32px 24px 28px;text-align:center;font-size:clamp(22px,5.5vw,38px);line-height:1.28;text-shadow:0 2px 14px rgba(0,0,0,.75)}
-.caption span{display:block;margin-top:10px;color:rgba(255,255,255,.7);font-size:.45em;letter-spacing:.09em;text-transform:uppercase}.heart{display:block;color:var(--accent);font-size:1.15em;margin-bottom:10px;animation:beat 1.15s ease-in-out infinite}
-@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.14)}30%{transform:scale(1)}45%{transform:scale(1.1)}60%{transform:scale(1)}}
-.final{font-size:clamp(44px,12vw,96px);font-weight:700;letter-spacing:.025em;text-transform:uppercase}.signature{display:block;margin-top:22px;font-size:.28em;font-weight:400;text-transform:none;color:var(--muted)}
-.controls{position:fixed;z-index:30;right:14px;bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:8px;opacity:.75}.control{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.35);color:#fff;backdrop-filter:blur(8px);cursor:pointer}
-.progress{position:fixed;z-index:30;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.08)}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--accent));transition:width .5s ease}
-.hint{position:fixed;z-index:31;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);font:12px Arial,sans-serif;color:rgba(255,255,255,.48);letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:.6s;white-space:nowrap}.hint.show{opacity:1}
-@media(max-width:600px){.photo-card{height:min(76svh,820px);border-radius:20px}.caption{padding:26px 18px 24px}.controls{right:10px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:.01ms!important}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050507">
+  <title>Mūsų istorija</title>
+
+  <style>
+    :root{
+      --bg:#050507;
+      --text:#fffaf6;
+      --muted:rgba(255,250,246,.72);
+      --accent:#ff5f84;
+      --gold:#e7c98f;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      width:100%;
+      min-height:100%;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    body{
+      font-family:Georgia,"Times New Roman",serif;
+      overflow:hidden;
+    }
+
+    button{font:inherit}
+
+    .stars,
+    .stars::before,
+    .stars::after{
+      position:fixed;
+      inset:0;
+      content:"";
+      pointer-events:none;
+      background-image:
+        radial-gradient(circle at 15% 20%,rgba(255,255,255,.9) 0 1px,transparent 1.5px),
+        radial-gradient(circle at 80% 25%,rgba(255,255,255,.7) 0 1px,transparent 1.5px),
+        radial-gradient(circle at 35% 75%,rgba(255,255,255,.8) 0 1px,transparent 1.5px),
+        radial-gradient(circle at 65% 65%,rgba(255,255,255,.55) 0 1px,transparent 1.5px);
+      background-size:210px 210px,270px 270px,330px 330px,390px 390px;
+      opacity:.34;
+      animation:drift 28s linear infinite;
+    }
+
+    .stars::before{
+      opacity:.17;
+      transform:scale(1.3);
+      animation-duration:42s;
+    }
+
+    .stars::after{
+      opacity:.1;
+      transform:scale(1.7);
+      animation-duration:58s;
+    }
+
+    @keyframes drift{
+      to{transform:translate3d(-120px,-180px,0)}
+    }
+
+    .screen{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:
+        max(24px,env(safe-area-inset-top))
+        18px
+        max(28px,env(safe-area-inset-bottom));
+    }
+
+    #start{
+      z-index:20;
+      background:
+        radial-gradient(circle at 50% 42%,rgba(83,44,58,.23),transparent 38%),
+        radial-gradient(circle at 50% 50%,#17131a 0,#050507 62%);
+    }
+
+    .start-card{
+      width:min(92vw,680px);
+      text-align:center;
+    }
+
+    .tiny{
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-size:12px;
+    }
+
+    .start-card h1{
+      margin:18px 0 14px;
+      font-size:clamp(42px,10vw,82px);
+      font-weight:400;
+      line-height:1.05;
+    }
+
+    .start-card p{
+      margin:0 0 30px;
+      color:var(--muted);
+      font-size:clamp(17px,4vw,22px);
+      line-height:1.55;
+    }
+
+    .start-btn{
+      min-width:190px;
+      padding:16px 34px;
+      border:1px solid rgba(255,255,255,.42);
+      border-radius:999px;
+      background:rgba(255,255,255,.07);
+      color:#fff;
+      backdrop-filter:blur(8px);
+      cursor:pointer;
+      font-size:19px;
+      box-shadow:0 12px 40px rgba(0,0,0,.35);
+      transition:transform .2s ease,background .2s ease;
+    }
+
+    .start-btn:hover{background:rgba(255,255,255,.12)}
+    .start-btn:active{transform:scale(.97)}
+
+    #experience{
+      display:none;
+      z-index:5;
+    }
+
+    .scene{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:
+        max(26px,env(safe-area-inset-top))
+        18px
+        max(34px,env(safe-area-inset-bottom));
+      opacity:0;
+      visibility:hidden;
+      transform:scale(1.015);
+      transition:
+        opacity 1.15s ease,
+        transform 1.15s ease,
+        visibility 1.15s;
+    }
+
+    .scene.active{
+      opacity:1;
+      visibility:visible;
+      transform:scale(1);
+    }
+
+    .text-wrap{
+      width:min(92vw,920px);
+      margin:0 auto;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:.12em;
+      font-size:clamp(30px,7vw,68px);
+      line-height:1.18;
+      text-wrap:balance;
+    }
+
+    .text-wrap .line{
+      display:block;
+      width:100%;
+    }
+
+    .text-wrap em{
+      display:block;
+      font-style:italic;
+      color:#fffdf9;
+    }
+
+    .text-wrap small{
+      display:block;
+      margin-top:18px;
+      color:var(--muted);
+      font-size:.38em;
+      line-height:1.45;
+      letter-spacing:.03em;
+      max-width:760px;
+    }
+
+    .photo-card{
+      width:min(92vw,760px);
+      height:min(78svh,900px);
+      position:relative;
+      border-radius:26px;
+      overflow:hidden;
+      background:#111;
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:0 28px 90px rgba(0,0,0,.62);
+    }
+
+    .photo-card img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transform:scale(1.015);
+      animation:kenburns 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes kenburns{
+      from{transform:scale(1.015)}
+      to{transform:scale(1.075)}
+    }
+
+    .photo-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.16) 54%,rgba(0,0,0,.05));
+    }
+
+    .caption{
+      position:absolute;
+      z-index:2;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:34px 24px 28px;
+      text-align:center;
+      font-size:clamp(22px,5.4vw,38px);
+      line-height:1.28;
+      text-shadow:0 2px 14px rgba(0,0,0,.78);
+      text-wrap:balance;
+    }
+
+    .caption span{
+      display:block;
+      margin-top:11px;
+      color:rgba(255,255,255,.68);
+      font-size:.43em;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .heart{
+      display:block;
+      margin-bottom:10px;
+      color:var(--accent);
+      font-size:1.14em;
+      animation:beat 1.15s ease-in-out infinite;
+    }
+
+    @keyframes beat{
+      0%,100%{transform:scale(1)}
+      15%{transform:scale(1.14)}
+      30%{transform:scale(1)}
+      45%{transform:scale(1.1)}
+      60%{transform:scale(1)}
+    }
+
+    .final{
+      font-size:clamp(46px,12vw,98px);
+      font-weight:700;
+      line-height:1.06;
+      letter-spacing:.025em;
+      text-transform:uppercase;
+    }
+
+    .signature{
+      display:block;
+      margin-top:22px;
+      color:var(--muted);
+      font-size:.27em;
+      font-weight:400;
+      line-height:1.5;
+      text-transform:none;
+    }
+
+    .controls{
+      position:fixed;
+      right:14px;
+      bottom:max(14px,env(safe-area-inset-bottom));
+      z-index:30;
+      display:flex;
+      gap:8px;
+      opacity:.78;
+    }
+
+    .control{
+      width:44px;
+      height:44px;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:50%;
+      background:rgba(0,0,0,.38);
+      color:#fff;
+      backdrop-filter:blur(8px);
+      cursor:pointer;
+    }
+
+    .progress{
+      position:fixed;
+      z-index:30;
+      left:0;
+      right:0;
+      bottom:0;
+      height:3px;
+      background:rgba(255,255,255,.08);
+    }
+
+    .progress>div{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,var(--gold),var(--accent));
+      transition:width .5s ease;
+    }
+
+    .hint{
+      position:fixed;
+      z-index:31;
+      left:50%;
+      bottom:max(22px,env(safe-area-inset-bottom));
+      transform:translateX(-50%);
+      color:rgba(255,255,255,.46);
+      font:12px Arial,sans-serif;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      opacity:0;
+      transition:.6s;
+    }
+
+    .hint.show{opacity:1}
+
+    @media(max-width:600px){
+      .scene{
+        padding:
+          max(22px,env(safe-area-inset-top))
+          14px
+          max(42px,env(safe-area-inset-bottom));
+      }
+
+      .text-wrap{
+        width:94vw;
+        font-size:clamp(30px,8.2vw,46px);
+        line-height:1.2;
+      }
+
+      .photo-card{
+        width:94vw;
+        height:min(76svh,820px);
+        border-radius:20px;
+      }
+
+      .caption{
+        padding:28px 18px 24px;
+        font-size:clamp(22px,6vw,34px);
+      }
+
+      .controls{right:10px}
+    }
+
+    @media(max-width:390px){
+      .text-wrap{font-size:clamp(27px,7.8vw,38px)}
+      .final{font-size:clamp(42px,12vw,60px)}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        animation:none!important;
+        transition-duration:.01ms!important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="stars"></div>
-<section id="start" class="screen"><div class="start-card"><div class="tiny">Tau</div><h1>Mūsų istorija...</h1><p>Įjunk garsą ir paspausk pradėti.<br>Visa kita palik šiai akimirkai.</p><button id="startBtn" class="start-btn">♥ Pradėti</button></div></section>
-<main id="experience" class="screen" aria-live="polite">
-<section class="scene text-scene">Yra žmonių,<br>kurie pirmą kartą susitinka prie jūros.</section>
-<section class="scene text-scene">Yra tokių,<br>kurie pirmą kartą pasibučiuoja po Eifelio bokštu.</section>
-<section class="scene text-scene">O mes turime savo istoriją...</section>
-<section class="scene text-scene">Ji prasidėjo<br><em>„Maximos“ aikštelėje.</em></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-01.jpg" alt=""><div class="caption">Su tavimi net paprastos akimirkos tampa gražiausiais mano prisiminimais.<span>Mes</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-02.jpg" alt=""><div class="caption">Tavo šypsena man visada ryškesnė už pačias gražiausias gėles.<span>Tavo šviesa</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-03.jpg" alt=""><div class="caption">Žaviuosi ne tik tuo, kaip atrodai, bet ir tuo, kokia nuostabi esi kaip žmogus.<span>Tavo grožis</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-04.jpg" alt=""><div class="caption">Kiekviena gėlė graži, bet nė viena neprilygsta tau.<span>Mano gražuolė</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-05.jpg" alt=""><div class="caption">Su tavimi kiekvienas vakaras tampa akimirka, kurios nesinori paleisti.<span>Kartu</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-06.jpg" alt=""><div class="caption">Galėčiau valandų valandas žiūrėti į tave ir vis tiek žavėčiausi iš naujo.<span>Tu</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-07.jpg" alt=""><div class="caption">Labiausiai myliu tai, kad su tavimi galiu būti savimi.<span>Mūsų kasdienybė</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-08.jpg" alt=""><div class="caption">Net kai kvailioji, man esi pati gražiausia.<span>Mano džiaugsmas</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-09.jpg" alt=""><div class="caption">Namai man nėra vieta. Namai man esi tu.<span>Mano ramybė</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-10.jpg" alt=""><div class="caption">Tavo ramybė ir šypsena yra tai, prie ko visada norisi sugrįžti.<span>Mano žmogus</span></div></article></section>
-<section class="scene"><article class="photo-card"><img src="assets/photo-11.jpg" alt=""><div class="caption">Mano mažasis Zuiki... kiekvieną dieną esu dėkingas, kad esi mano gyvenime.<span>Mano Zuiki</span></div></article></section>
-<section class="scene text-scene">Ir žinai ką?</section>
-<section class="scene text-scene">Aš nekeisčiau nė vienos<br>tos istorijos detalės.</section>
-<section class="scene text-scene">Yra tūkstančiai žodžių...<small>bet šiandien man svarbiausi tik trys.</small></section>
-<section class="scene text-scene final"><span class="heart">♥</span>Aš tave myliu<span class="signature">Ačiū, kad pasirinkai mane.<br>– Tavo Sarūnas</span></section>
-</main>
-<div class="controls"><button id="muteBtn" class="control" aria-label="Garsas">♫</button><button id="replayBtn" class="control" aria-label="Kartoti">↻</button></div>
-<div class="progress"><div id="progressBar"></div></div><div id="hint" class="hint">Paliesk ekraną, kad pereitum toliau</div>
-<audio id="music" preload="auto" playsinline><source src="music.mp3" type="audio/mpeg"></audio>
-<script>
-const scenes=[...document.querySelectorAll(".scene")],start=document.getElementById("start"),experience=document.getElementById("experience"),startBtn=document.getElementById("startBtn"),replayBtn=document.getElementById("replayBtn"),muteBtn=document.getElementById("muteBtn"),music=document.getElementById("music"),progressBar=document.getElementById("progressBar"),hint=document.getElementById("hint");
-const durations=[3900,4200,3000,3900,4800,4800,5000,4800,4800,4800,5000,4600,4800,4800,5000,2500,3800,4200,999999];
-let current=-1,timer=null,muted=false;
-function showScene(index){scenes.forEach((s,i)=>s.classList.toggle("active",i===index));current=index;progressBar.style.width=((index+1)/scenes.length*100)+"%";clearTimeout(timer);if(index<scenes.length-1)timer=setTimeout(()=>showScene(index+1),durations[index]||4200)}
-async function begin(){start.style.display="none";experience.style.display="flex";try{music.currentTime=24;music.volume=.55;await music.play()}catch(e){console.log(e)}showScene(0);setTimeout(()=>hint.classList.add("show"),2500);setTimeout(()=>hint.classList.remove("show"),6000)}
-function replay(){clearTimeout(timer);try{music.currentTime=24;music.play()}catch(e){}showScene(0)}
-startBtn.addEventListener("click",begin);replayBtn.addEventListener("click",replay);muteBtn.addEventListener("click",()=>{muted=!muted;music.muted=muted;muteBtn.textContent=muted?"×":"♫"});
-experience.addEventListener("click",e=>{if(e.target.closest("button"))return;if(current<scenes.length-1)showScene(current+1)});
-document.addEventListener("keydown",e=>{if(e.key==="ArrowRight"&&current<scenes.length-1)showScene(current+1);if(e.key==="ArrowLeft"&&current>0)showScene(current-1)});
-</script>
-</body></html>
+  <div class="stars"></div>
+
+  <section id="start" class="screen">
+    <div class="start-card">
+      <div class="tiny">Tau</div>
+      <h1>Mūsų istorija...</h1>
+      <p>Įjunk garsą ir paspausk pradėti.<br>Visa kita palik šiai akimirkai.</p>
+      <button id="startBtn" class="start-btn">♥ Pradėti</button>
+    </div>
+  </section>
+
+  <main id="experience" class="screen" aria-live="polite">
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">Yra žmonių,</span>
+        <span class="line">kurie pirmą kartą susitinka prie jūros.</span>
+      </div>
+    </section>
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">Yra tokių,</span>
+        <span class="line">kurie pirmą kartą pasibučiuoja</span>
+        <span class="line">po Eifelio bokštu.</span>
+      </div>
+    </section>
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">O mes turime</span>
+        <span class="line">savo istoriją...</span>
+      </div>
+    </section>
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">Ji prasidėjo</span>
+        <em>„Maximos“ aikštelėje.</em>
+      </div>
+    </section>
+
+    <section class="scene"><article class="photo-card"><img src="assets/photo-01.jpg" alt=""><div class="caption">Su tavimi net paprastos akimirkos tampa gražiausiais mano prisiminimais.<span>Mes</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-02.jpg" alt=""><div class="caption">Tavo šypsena man visada ryškesnė už pačias gražiausias gėles.<span>Tavo šviesa</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-03.jpg" alt=""><div class="caption">Žaviuosi ne tik tuo, kaip atrodai, bet ir tuo, kokia nuostabi esi kaip žmogus.<span>Tavo grožis</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-04.jpg" alt=""><div class="caption">Kiekviena gėlė graži, bet nė viena neprilygsta tau.<span>Mano gražuolė</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-05.jpg" alt=""><div class="caption">Su tavimi kiekvienas vakaras tampa akimirka, kurios nesinori paleisti.<span>Kartu</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-06.jpg" alt=""><div class="caption">Galėčiau valandų valandas žiūrėti į tave ir vis tiek žavėčiausi iš naujo.<span>Tu</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-07.jpg" alt=""><div class="caption">Labiausiai myliu tai, kad su tavimi galiu būti savimi.<span>Mūsų kasdienybė</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-08.jpg" alt=""><div class="caption">Net kai kvailioji, man esi pati gražiausia.<span>Mano džiaugsmas</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-09.jpg" alt=""><div class="caption">Namai man nėra vieta. Namai man esi tu.<span>Mano ramybė</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-10.jpg" alt=""><div class="caption">Tavo ramybė ir šypsena yra tai, prie ko visada norisi sugrįžti.<span>Mano žmogus</span></div></article></section>
+    <section class="scene"><article class="photo-card"><img src="assets/photo-11.jpg" alt=""><div class="caption">Mano mažasis Zuiki... kiekvieną dieną esu dėkingas, kad esi mano gyvenime.<span>Mano Zuiki</span></div></article></section>
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">Ir žinai ką?</span>
+      </div>
+    </section>
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">Aš nekeisčiau nė vienos</span>
+        <span class="line">tos istorijos detalės.</span>
+      </div>
+    </section>
+
+    <section class="scene">
+      <div class="text-wrap">
+        <span class="line">Yra tūkstančiai žodžių...</span>
+        <small>bet šiandien man svarbiausi tik trys.</small>
+      </div>
+    </section>
+
+    <section class="scene">
+      <div class="text-wrap final">
+        <span class="heart">♥</span>
+        <span class="line">Aš tave myliu</span>
+        <span class="signature">Ačiū, kad pasirinkai mane.<br>– Tavo Sarūnas</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="controls">
+    <button id="muteBtn" class="control" aria-label="Įjungti arba išjungti garsą">♫</button>
+    <button id="replayBtn" class="control" aria-label="Paleisti iš naujo">↻</button>
+  </div>
+
+  <div class="progress"><div id="progressBar"></div></div>
+  <div id="hint" class="hint">Paliesk ekraną, kad pereitum toliau</div>
+
+  <audio id="music" preload="auto" playsinline>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const scenes = [...document.querySelectorAll(".scene")];
+    const start = document.getElementById("start");
+    const experience = document.getElementById("experience");
+    const startBtn = document.getElementById("startBtn");
+    const replayBtn = document.getElementById("replayBtn");
+    const muteBtn = document.getElementById("muteBtn");
+    const music = document.getElementById("music");
+    const progressBar = document.getElementById("progressBar");
+    const hint = document.getElementById("hint");
+
+    const durations = [
+      3900, 4200, 3000, 3900,
+      4800, 4800, 5000, 4800, 4800, 4800, 5000, 4600, 4800, 4800, 5000,
+      2500, 3800, 4200, 999999
+    ];
+
+    let current = -1;
+    let timer = null;
+    let muted = false;
+
+    function showScene(index){
+      scenes.forEach((scene, i) => {
+        scene.classList.toggle("active", i === index);
+      });
+
+      current = index;
+      progressBar.style.width = ((index + 1) / scenes.length * 100) + "%";
+
+      clearTimeout(timer);
+
+      if(index < scenes.length - 1){
+        timer = setTimeout(() => {
+          showScene(index + 1);
+        }, durations[index] || 4200);
+      }
+    }
+
+    async function begin(){
+      start.style.display = "none";
+      experience.style.display = "flex";
+
+      try{
+        music.currentTime = 24;
+        music.volume = 0.55;
+        await music.play();
+      }catch(error){
+        console.log("Muzika nepasileido:", error);
+      }
+
+      showScene(0);
+
+      setTimeout(() => hint.classList.add("show"), 2500);
+      setTimeout(() => hint.classList.remove("show"), 6000);
+    }
+
+    function replay(){
+      clearTimeout(timer);
+
+      try{
+        music.currentTime = 24;
+        music.play();
+      }catch(error){}
+
+      showScene(0);
+    }
+
+    startBtn.addEventListener("click", begin);
+
+    replayBtn.addEventListener("click", replay);
+
+    muteBtn.addEventListener("click", () => {
+      muted = !muted;
+      music.muted = muted;
+      muteBtn.textContent = muted ? "×" : "♫";
+    });
+
+    experience.addEventListener("click", (event) => {
+      if(event.target.closest("button")) return;
+
+      if(current < scenes.length - 1){
+        showScene(current + 1);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if(event.key === "ArrowRight" && current < scenes.length - 1){
+        showScene(current + 1);
+      }
+
+      if(event.key === "ArrowLeft" && current > 0){
+        showScene(current - 1);
+      }
+    });
+  </script>
+</body>
+</html>

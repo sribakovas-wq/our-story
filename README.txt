@@ -1,10 +1,10 @@
-MŪSŲ ISTORIJA — KAIP ĮKELTI
+MŪSŲ ISTORIJA — ĮKĖLIMAS
 
 1. Į šį aplanką įdėk savo muzikos failą.
 2. Pervadink jį tiksliai: music.mp3
 
-Aplankas turi atrodyti taip:
-our-story-galutinis/
+Struktūra:
+our-story-premium/
   index.html
   music.mp3
   assets/
@@ -12,11 +12,11 @@ our-story-galutinis/
     ...
     photo-11.jpg
 
-Į GitHub:
+GitHub:
 1. Atidaryk savo repozitoriją „our-story“.
-2. Spausk Add file → Upload files.
+2. Add file → Upload files.
 3. Įkelk index.html, music.mp3 ir visą assets aplanką.
-4. Apačioje spausk Commit changes.
+4. Commit changes.
 5. Palauk 1–2 minutes.
 6. Atidaryk:
    https://sribakovas-wq.github.io/our-story/
