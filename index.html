@@ -635,10 +635,12 @@
 
     const durations = scenes.map((scene, index) => {
       if (index === scenes.length - 1) return 999999;
-      if (scene.querySelector(".photo-card")) return 6500;
+      if (scene.querySelector(".photo-card")) {
+        return 7000;
+      }
 
       const textLength = scene.innerText.trim().length;
-      return Math.max(4200, Math.min(8200, 2800 + textLength * 34));
+      return Math.max(5000, Math.min(9000, 3500 + textLength * 36));
     });
 
     let current = -1;
