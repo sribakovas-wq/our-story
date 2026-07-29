@@ -698,19 +698,7 @@
 
       showScene(0);
     }
-
-
-    // Kai daina baigiasi, paleidžiame ją iš naujo nuo 20 sekundės.
-    music.addEventListener("ended", async () => {
-      try {
-        music.currentTime = 20;
-        await music.play();
-      } catch (error) {
-        console.log("Nepavyko pakartoti muzikos:", error);
-      }
-    });
-
-    startBtn.addEventListener("click", begin);
+startBtn.addEventListener("click", begin);
 
     replayBtn.addEventListener("click", replay);
 
@@ -759,6 +747,38 @@
         requestWakeLock();
       }
     });
+
+
+    // Sklandus muzikos perėjimas prieš pakartojimą
+    let fading = false;
+    music.volume = 1;
+
+    setInterval(async () => {
+      if (!music.paused && !fading && music.duration &&
+          (music.duration - music.currentTime) < 2.2) {
+        fading = true;
+
+        for (let v = 1; v >= 0; v -= 0.08) {
+          music.volume = Math.max(0, v);
+          await new Promise(resolve => setTimeout(resolve, 90));
+        }
+
+        music.currentTime = 20;
+        try {
+          await music.play();
+        } catch (error) {
+          console.log("Nepavyko pakartoti muzikos:", error);
+        }
+
+        for (let v = 0; v <= 1; v += 0.08) {
+          music.volume = Math.min(1, v);
+          await new Promise(resolve => setTimeout(resolve, 90));
+        }
+
+        music.volume = 1;
+        fading = false;
+      }
+    }, 250);
 
 </script>
 </body>
