@@ -699,6 +699,17 @@
       showScene(0);
     }
 
+
+    // Kai daina baigiasi, paleidžiame ją iš naujo nuo 20 sekundės.
+    music.addEventListener("ended", async () => {
+      try {
+        music.currentTime = 20;
+        await music.play();
+      } catch (error) {
+        console.log("Nepavyko pakartoti muzikos:", error);
+      }
+    });
+
     startBtn.addEventListener("click", begin);
 
     replayBtn.addEventListener("click", replay);
